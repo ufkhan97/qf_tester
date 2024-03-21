@@ -4,11 +4,8 @@ from math import log
 from math import sqrt
 from math import floor
 import numpy as np
-import matplotlib.pyplot as plt
 from functools import reduce
-import time
-import json
-import os
+
 
 def add(x,y):
   return x + y
