@@ -337,12 +337,16 @@ def flag_base_votes(votes, min_donation_threshold, score_threshold):
     votes['low_amount'] = (votes['amountUSD'] < min_donation_threshold).astype(int) 
     # base votes are when low_amount = 0, low_score = 0, self_vote = 0
     votes['base_vote'] = np.all([votes['low_amount'] == 0, votes['low_score'] == 0, votes['self_vote'] == 0], axis=0).astype(int)
-
     return votes
 
 def prep_donations_data(votes_data, min_donation_threshold, score_threshold):
   votes_data = flag_base_votes(votes_data, min_donation_threshold, score_threshold)
-  votes_data = apply_sliding_scale(votes_data)
+  if 'starting_amountUSD' not in votes_data.columns:
+      votes_data['starting_amountUSD'] = votes_data['amountUSD']
+  else: 
+      votes_data['amountUSD'] = votes_data['starting_amountUSD']
+  votes_data.loc[votes_data['base_vote'] == 0, 'amountUSD'] = 0
+  #votes_data = apply_sliding_scale(votes_data)
   return votes_data
 
 def pivot_votes(round_votes):
