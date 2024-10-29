@@ -16,11 +16,11 @@ def run_qf(votes_file, strategy, min_donation_threshold_amount, matching_cap_amo
 def run_test():
     # Use a default csv file in the same directory
     votes_file = 'Zuzalu_Events_votes.csv'
-    strategy = 'COCM' # can accept: 'qf' or 'COCM' 
+    strategy = 'COCM' # can accept: 'qf', 'COCM', 'pairwise' or 'donation_profile_cluster_match'
     min_donation_threshold_amount = 1
     matching_cap_amount = 50
     matching_amount = 166.5
-    passport_threshold = 15
+    passport_threshold = 15 
 
     run_qf(votes_file, strategy, min_donation_threshold_amount, matching_cap_amount, matching_amount, passport_threshold)
 
